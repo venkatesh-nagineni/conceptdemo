@@ -44,49 +44,117 @@ export class AppComponent implements OnInit {
   // subscribe to the channel to which channel we had published
   ngOnInit() {
     this.pausestart = true;
-    this.pubnub.subscribe({ channels: ['temp_thermo_iot'], triggerEvents: ['message', 'status']});
+    this.pubnub.subscribe({ channels: ['temp_thermo_iot'], triggerEvents: ['message', 'status'] });
     this.getdata();
+
     this.options = {
-      chart: { type: 'spline' },
-      title: { text: 'Real Time Sensor Data' },
+      colors: ['#DDDF0D', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee',
+        '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+      chart: {
+        type: 'spline',
+        backgroundColor: {
+          linearGradient: [0, 0, 250, 500],
+          stops: [
+            [0, 'rgb(48, 96, 48)'],
+            [1, 'rgb(0, 0, 0)']
+          ]
+        },
+        borderColor: '#000000',
+        borderWidth: 2,
+        className: 'dark-container',
+        plotBackgroundColor: 'rgba(255, 255, 255, .1)',
+        plotBorderColor: '#CCCCCC',
+        plotBorderWidth: 1
+      },
+      title: {
+        text: 'Real Time Sensor Data', style: {
+          color: '#C0C0C0',
+          font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+        }
+      },
       animation: Highcharts['svg'],
       responsive: true,
       credits: false,
       margin: 0,
-      series: [{ data: [] }],
+      series: [{ data: [], showInLegend: false }],
       xAxis: {
         type: 'datetime',
         tickPixelInterval: 150,
+        gridLineColor: '#333333',
+        gridLineWidth: 1,
+        labels: {
+          style: {
+            color: '#A0A0A0'
+          }
+        },
+        lineColor: '#A0A0A0',
+        tickColor: '#A0A0A0',
         title: {
-          text: 'Current Time'
+          text: 'Current Time',
+          style: {
+            color: '#CCC',
+            fontWeight: 'bold',
+            fontSize: '12px',
+            fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+
+          }
         }
       },
       yAxis: {
-        title: {
-          text: 'Voltage'
-        },
+        min: 0,
+        max: 3.5,
+        tickInterval: 0.5,
+        startOnTick: false,
+        endOnTick: false,
         plotLines: [{
           value: 0,
           width: 1,
           color: '#808080'
-        }]
+        }],
+        gridLineColor: '#333333',
+        labels: {
+          style: {
+            color: '#A0A0A0'
+          }
+        },
+        lineColor: '#A0A0A0',
+        minorTickInterval: null,
+        tickColor: '#A0A0A0',
+        tickWidth: 1,
+        title: {
+          text: 'Voltage',
+          style: {
+            color: '#CCC',
+            fontWeight: 'bold',
+            fontSize: '12px',
+            fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+          }
+        }
       },
       tooltip: {
         formatter: function () {
           return '<b>' + 'Current Voltage' + '</b><br/>' +
             Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
             '<b>' + Highcharts.numberFormat(this.y, 4) + '</b>';
+        },
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        style: {
+          color: '#F0F0F0'
         }
+
       },
+
       plotOptions: {
         series: {
-            marker: {
-                enabled: false
-            }
-        }
-    },
-      legend: {
-        enabled: false
+          marker: {
+            enabled: false
+          }
+        },
+        spline: {
+          marker: {
+            lineColor: '#333'
+          }
+        },
       },
       exporting: {
         enabled: false
@@ -95,7 +163,7 @@ export class AppComponent implements OnInit {
     this.timeinterval = setInterval(() => {
       const x = (new Date()).getTime() + 7200000; // current time
       if (this.voltage) {
-        this.chart['series'][0].addPoint([x, this.voltage], this.pausestart );
+        this.chart['series'][0].addPoint([x, this.voltage], this.pausestart);
       }
     }, 250);
   }
@@ -107,7 +175,7 @@ export class AppComponent implements OnInit {
   // get data from channel which we have subscribed
   getdata() {
     this.pubnub.getMessage('temp_thermo_iot', (msg: Message) => {
-        this.voltage = Number(msg.message.voltage);
+      this.voltage = Number(msg.message.voltage);
     });
   }
 
