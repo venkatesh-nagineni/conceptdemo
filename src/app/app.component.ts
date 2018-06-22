@@ -4,8 +4,7 @@ import * as Highcharts from 'highcharts';
 
 export interface Message {
   message: {
-    temperature: any;
-    fahrenheit: any;
+    voltage: number;
   };
 }
 
@@ -23,6 +22,7 @@ export class AppComponent implements OnInit {
   fahrenheit: any;
   notfound: boolean;
   timeinterval: any;
+  voltage: number;
 
   constructor(public pubnub: PubNubAngular) {
     this.pubnubinit();
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
       },
       yAxis: {
         title: {
-          text: 'Temperature in Celsius'
+          text: 'Voltage'
         },
         plotLines: [{
           value: 0,
@@ -73,11 +73,18 @@ export class AppComponent implements OnInit {
       },
       tooltip: {
         formatter: function () {
-          return '<b>' + 'Current Temperature' + '</b><br/>' +
+          return '<b>' + 'Current Voltage' + '</b><br/>' +
             Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
             '<b>' + Highcharts.numberFormat(this.y, 4) + '</b>';
         }
       },
+      plotOptions: {
+        series: {
+            marker: {
+                enabled: false
+            }
+        }
+    },
       legend: {
         enabled: false
       },
@@ -87,10 +94,10 @@ export class AppComponent implements OnInit {
     };
     this.timeinterval = setInterval(() => {
       const x = (new Date()).getTime() + 7200000; // current time
-      if (this.latesttemp) {
-        this.chart['series'][0].addPoint([x, this.latesttemp], this.pausestart );
+      if (this.voltage) {
+        this.chart['series'][0].addPoint([x, this.voltage], this.pausestart );
       }
-    }, 3000);
+    }, 250);
   }
 
   saveInstance(chartInstance) {
@@ -100,8 +107,7 @@ export class AppComponent implements OnInit {
   // get data from channel which we have subscribed
   getdata() {
     this.pubnub.getMessage('temp_thermo_iot', (msg: Message) => {
-        this.latesttemp = msg.message.temperature;
-        this.fahrenheit = msg.message.fahrenheit;
+        this.voltage = Number(msg.message.voltage);
     });
   }
 
@@ -114,4 +120,3 @@ export class AppComponent implements OnInit {
   }
 
 }
-
