@@ -165,7 +165,7 @@ export class AppComponent implements OnInit {
       if (this.voltage) {
         this.chart['series'][0].addPoint([x, this.voltage], this.pausestart);
       }
-    }, 250);
+    }, 100);
   }
 
   saveInstance(chartInstance) {
