@@ -1,47 +1,69 @@
 canvas {
-/*   background-image: linear-gradient(to right top, #005e58, #036660, #066f68, #0b7771, #0f8079);
-   background-image: linear-gradient(to right top, #387875, #2d716e, #226b66, #14645f, #005e58); */
-  margin-top: 5px;
-  background-color: #0F583D;
-}
+  /*   background-image: linear-gradient(to right top, #005e58, #036660, #066f68, #0b7771, #0f8079);
+     background-image: linear-gradient(to right top, #387875, #2d716e, #226b66, #14645f, #005e58); */
+    margin-top: 10px;
+    background-color: #0F583D;
+  }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  max-width: 35%;
-  float: left;
-  margin-top: 20px;
-}
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    max-width: 35%;
+    float: left;
+    margin-top: 20px;
+  }
 
-.secondcard {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: auto;
-  float: right;
-  max-height: 15%;
-  margin-top: 20px;
-}
+  .secondcard {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: auto;
+    float: right;
+    max-height: 15%;
+    margin-top: 20px;
+  }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
 
-.containerdiv {
-  padding: 2px 16px;
-}
+  .containerdiv {
+    padding: 2px 16px;
+  }
 
-#button1{
-  width: 100px;
-  height: 40px;
-  background-color: orange;
-  color: white;
-  border: none;
-}
+  #button1{
+    width: 100px;
+    height: 40px;
+    background-color: orange;
+    color: white;
+    border: none;
+  }
 
-#button2{
-  width: 100px;
-  height: 40px;
-  background-color: rgb(182, 39, 39);
-  color: white;
-  border: none;
-}
+  #button2{
+    width: 100px;
+    height: 40px;
+    background-color: rgb(182, 39, 39);
+    color: white;
+    border: none;
+  }
+
+  #containerdiv{
+    text-align: center;
+  }
+
+  .containerfull{
+  width: 99%;
+  background-color: white;
+  border-bottom: 2px solid orange;
+  padding-left: 7px;
+  }
+
+  .heading{
+  color:black;
+  padding-top: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  img {
+    width:200px;
+    height:120px;
+  }
