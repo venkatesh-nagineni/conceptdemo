@@ -1,13 +1,8 @@
-<div class="containerfull">
-  <div class="row">
-    <div class="col-xs-4 col-sm-4 col-lg-4" > <img src="assets/images/mst.png" alt="university logo"> </div>
-    <div style="padding-left:30px;padding-top:5px" class="col-xs-5 col-sm-6 col-lg-6" ><h1 class="heading"> Real Time Breathe Sensor Data</h1></div>
-  </div>
+<div>
+  <canvas height="110" baseChart #myChart="base-chart" [datasets]="datasets" [options]="options">
+  </canvas>
 </div>
 
-<div>
-<chart [options]="options" type="chart" class="chartstyle" (load)="saveInstance($event.context)" style="height: 50%"> </chart>
-<br>
 <div class="card">
   <div class="containerdiv">
     <h4><b>Current Voltage : {{voltage}}</b></h4>
@@ -19,5 +14,4 @@
         <button type="button home-button" id="button1" (click)="pause()">Pause</button>
         <button type="button contact-button" id="button2" (click)="start()" > Start</button>
     </div>
-</div>
 </div>
