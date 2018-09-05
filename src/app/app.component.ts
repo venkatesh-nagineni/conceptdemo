@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.pubnub.subscribe({ channels: ['temp_thermo_iot'], triggerEvents: ['message', 'status'] });
     this.getdata();
 
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit {
             beginAtZero: true,
             steps: 5,
             stepValue: 0.5,
-            max: 3,
+            max: 3.5,
             fontColor: '#fff'
           },
           scaleLabel: {
@@ -106,7 +107,7 @@ export class AppComponent implements OnInit {
               this.binding(dataset);
             });
           },
-          duration: 5000,
+          duration: 7000,
           refresh: 25,
         }
       }
