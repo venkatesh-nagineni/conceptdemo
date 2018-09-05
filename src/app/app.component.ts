@@ -29,8 +29,8 @@ export class AppComponent implements OnInit {
     // initialze pubnub keys
   pubnubinit() {
     this.pubnub.init({
-      publishKey: 'pub-c-7bc573ca-a768-407f-b8d2-df39e5694b87',
-      subscribeKey: 'sub-c-9df4c8f4-6bfa-11e8-967c-82814fd59ac3'
+      publishKey: 'pub-c-c77fb1a0-86ed-45d4-89d0-7fa084bb91eb',
+      subscribeKey: 'sub-c-f444fd1e-b0e7-11e8-8bcf-72ec3275afd3'
     });
   }
 
